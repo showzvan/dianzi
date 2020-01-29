@@ -11,7 +11,7 @@ class Element14Spider(scrapy.Spider):
         # altRows = response.xpath('div[@class="innerWraper"]/table[@class="sProdList"]/tbody/tr[@class="altRow"]')
         altRows = response.css('#sProdList tbody tr')
         print(len(altRows))
-        # a = 1
+        a = 1
         # for altRow in altRows:
         #     # a += 1
         #     # print(a)
