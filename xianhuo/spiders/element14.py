@@ -10,11 +10,14 @@ class Element14Spider(scrapy.Spider):
     def parse(self, response):
         # altRows = response.xpath('div[@class="innerWraper"]/table[@class="sProdList"]/tbody/tr[@class="altRow"]')
         altRows = response.css('#sProdList tbody tr')
-        print(len(altRows))
-        # a = 1
-        # for altRow in altRows:
-        #     # a += 1
-        #     # print(a)
-        #     model = altRow.xpath('td[contains(@class,"productImage")]/input[@class="hVal"]/@value').extract_first()
-        #     print(model)
+        # print(altRows)
+        # print("一共有 %s 个" % len(altRows))
+        # for i in altRows:
+        #     print(i)
+        a = 1
+        for altRow in altRows:
+            # a += 1
+            # print(a)
+            model = altRow.xpath('td[contains(@class,"productImage")]/input[@class="hVal"]/@value').extract_first()
+            print(model)
 
