@@ -14,7 +14,7 @@ class Element14Spider(scrapy.Spider):
         # print("一共有 %s 个" % len(altRows))
         # for i in altRows:
         #     print(i)
-        # a = 1
+        a = 1
         for altRow in altRows:
             # a += 1
             # print(a)
