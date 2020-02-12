@@ -10,6 +10,7 @@ import scrapy
 
 class XianhuoItem(scrapy.Item):
     # 抓取内容：1.料号 2.价格 3.价格梯度 4.品牌 5.商城名
+    table = "xianhuospider"
     model = scrapy.Field()
     price = scrapy.Field()
     levels = scrapy.Field()
