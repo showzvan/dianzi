@@ -9,16 +9,16 @@ from sshtunnel import SSHTunnelForwarder
 
 def dbHandle():
     with SSHTunnelForwarder(
-            ssh_address_or_host=('', 22),  # 指定ssh登录的跳转机的address
+            ssh_address_or_host=('106.12.80.88', 22),  # 指定ssh登录的跳转机的address
             ssh_username='root',  # 跳转机的用户
-            ssh_password='',  # 跳转机的密码
+            ssh_password='zhoufan@0411',  # 跳转机的密码
             remote_bind_address=('127.0.0.1', 3306)
     ) as server:
         conn = pymysql.connect(
             port=server.local_bind_port,
             host = "127.0.0.1",
             user = "root",
-            password = "",
+            password = "ba98b57f0d744c8d",
             charset = "utf8",
             db="bijia",
             use_unicode = False
