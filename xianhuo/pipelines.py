@@ -9,26 +9,26 @@ from sshtunnel import SSHTunnelForwarder
 
 def dbHandle():
     with SSHTunnelForwarder(
-            ssh_address_or_host=('106.12.80.88', 22),  # 指定ssh登录的跳转机的address
+            ssh_address_or_host=('', 22),  # 指定ssh登录的跳转机的address
             ssh_username='root',  # 跳转机的用户
-            ssh_password='zhoufan@0411',  # 跳转机的密码
-            remote_bind_address=('127.0.0.1', 3306)
-    ) as server:
+            ssh_password='',  # 跳转机的密码
+            remote_bind_address=('127.0.0.1', 3306)) as server:
         conn = pymysql.connect(
             port=server.local_bind_port,
             host = "127.0.0.1",
             user = "root",
-            password = "ba98b57f0d744c8d",
+            password = "",
             charset = "utf8",
             db="bijia",
-            use_unicode = False
+            # use_unicode = False
         )
-        return conn
+    return conn
 
 class XianhuoPipeline(object):
     def process_item(self, item, spider):
         dbObject = dbHandle()
         cursor = dbObject.cursor()
+        # dbObject.close()
         # 动态构造
         data = dict(item)
         keys = ', '.join(data.keys())
@@ -36,11 +36,12 @@ class XianhuoPipeline(object):
         sql = 'insert into %s (%s) values (%s)' % (item.table, keys, values)
         try:
             cursor.execute(sql, tuple(data.values()))
-            cursor.connection.commit()
+            dbObject.commit()
             print("写入成功")
         except BaseException as e:
             print("错误在这里>>>>>>>>>>>>>", e, "<<<<<<<<<<<<<错误在这里")
             dbObject.rollback()
+        dbObject.close()
         return item
 
         # 初始写法

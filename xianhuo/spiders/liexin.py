@@ -28,7 +28,7 @@ class LiexinSpider(scrapy.Spider):
     }
 
     def start_requests(self):
-
+        pass
 
     def parse(self, response):
         goodsBox = response.css('.self-search .self-box')
